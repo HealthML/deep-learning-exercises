@@ -3,6 +3,11 @@ title: "Week 1 classroom worksheet"
 description: "Predict, try a parameter, explain a derivative, then compare fitting rules."
 format:
   html:
+    theme:
+      # Dark is the default for readers without a saved preference.
+      dark: [darkly, ../../styles/worksheet.scss, ../../styles/worksheet-dark.scss]
+      light: [cosmo, ../../styles/worksheet.scss, ../../styles/worksheet-light.scss]
+    respect-user-color-scheme: false
     html-math-method: mathml
     embed-resources: true
 execute:

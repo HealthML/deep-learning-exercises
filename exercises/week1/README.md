@@ -84,3 +84,10 @@ The worksheet is available as Markdown for reading on GitHub and as editable
 ```sh
 quarto render exercises/week1/worksheet.qmd --to html
 ```
+
+The rendered HTML opens with a pure black (`#000000`) background, matching the
+lecture slides and the book's dark appearance. Use the appearance toggle to
+switch to a light page. Inline and display equations use native MathML, and the
+styles and figure are embedded so the HTML can be viewed offline. A previously
+saved light preference may override the initial dark appearance; use the toggle
+to return to dark.

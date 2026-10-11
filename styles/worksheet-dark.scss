@@ -1,0 +1,29 @@
+/*-- scss:defaults --*/
+// Pure black surfaces for projection; typography is shared through worksheet.scss.
+$body-bg: #000000;
+$body-color: #e6edf3;
+$primary: #8fc7f1;
+$link-color: #8fc7f1;
+$body-secondary-bg: #000000;
+$body-tertiary-bg: #000000;
+$body-bg-dark: #000000;
+$body-secondary-bg-dark: #000000;
+$body-tertiary-bg-dark: #000000;
+$code-bg: #000000;
+$code-color: #dce9f5;
+$code-block-bg: #000000;
+$code-block-border-left: #8996a3;
+$navbar-bg: #000000;
+$sidebar-bg: #000000;
+$footer-bg: #000000;
+$card-bg: #000000;
+$input-bg: #000000;
+$input-color: #e6edf3;
+$popover-bg: #000000;
+$dropdown-bg: #000000;
+
+/*-- scss:rules --*/
+// Callout headers otherwise add tinted panels over the black page.
+.callout .callout-header {
+  background-color: transparent !important;
+}
