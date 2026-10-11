@@ -3,11 +3,6 @@ title: "Week 1 classroom worksheet"
 description: "Predict, try a parameter, explain a derivative, then compare fitting rules."
 format:
   html:
-    theme:
-      # Dark is the default for readers without a saved preference.
-      dark: [darkly, ../../styles/worksheet.scss, ../../styles/worksheet-dark.scss]
-      light: [cosmo, ../../styles/worksheet.scss, ../../styles/worksheet-light.scss]
-    respect-user-color-scheme: false
     html-math-method: mathml
     embed-resources: true
 execute:
@@ -15,7 +10,8 @@ execute:
 ---
 
 Work in pairs: one person operates the computer; the other predicts and records.
-Switch roles after three trials. Follow the setup in [README.md](README.md).
+Switch roles after three trials. Follow the setup in
+[the exercise README](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week1/README.md).
 No earlier reading is assumed. The lecturer will introduce each next task.
 
 ## 1. A model with one adjustable number — 5 minutes

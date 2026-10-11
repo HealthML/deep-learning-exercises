@@ -1,5 +1,6 @@
 Work in pairs: one person operates the computer; the other predicts and records.
-Switch roles after three trials. Follow the setup in [README.md](README.md).
+Switch roles after three trials. Follow the setup in
+[the exercise README](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week1/README.md).
 No earlier reading is assumed. The lecturer will introduce each next task.
 
 ## 1. A model with one adjustable number — 5 minutes

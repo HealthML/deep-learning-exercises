@@ -1,0 +1,27 @@
+---
+title: "Deep Learning classroom exercises"
+description: "Worksheets and runnable experiments for the HPI Deep Learning course."
+toc: false
+---
+
+Use these worksheets during the classroom sessions. Predict what will happen,
+run the experiment, and record your explanation with your partner.
+
+## Get ready
+
+[Follow the installation instructions](https://github.com/HealthML/deep-learning-exercises#install-python-and-create-an-environment)
+to clone the student repository and install Python and PyTorch. The code runs
+on CPU; no GPU or dataset download is needed for Week 1.
+
+You can read the worksheets here in your browser. Quarto is only needed if you
+want to render them yourself. Use the appearance toggle in the navigation bar
+to switch between the black and light backgrounds.
+
+## Classroom worksheets
+
+| Session | Material |
+|---|---|
+| Week 1: fitting a line | [Open the worksheet](exercises/week1/worksheet.qmd) · [Experiment instructions and commands](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week1/README.md) |
+
+The runnable scripts, source worksheets, and figures are available in the
+[student repository](https://github.com/HealthML/deep-learning-exercises).
