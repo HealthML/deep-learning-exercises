@@ -9,6 +9,11 @@ experiment, its synthetic data generator, and the lecture figures. It works
 independently of the book repository. Instructor notes and worksheet answer keys
 are maintained separately.
 
+Read the rendered [classroom worksheets online](https://healthml.github.io/deep-learning-exercises/).
+Updates are published automatically after merging into `main`. For the one-time
+Pages setup and the permanent link to add in Moodle, see
+[publishing instructions](docs/publishing.md).
+
 ## Get the code
 
 ```sh

@@ -7,7 +7,11 @@ dist/
 .pytest_cache/
 .ipynb_checkpoints/
 .quarto/
+_site/
 exercises/week1/output/
 exercises/week1/worksheet.html
 exercises/week1/worksheet_files/
 .DS_Store
+
+/.quarto/
+**/*.quarto_ipynb

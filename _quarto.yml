@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - "exercises/**/worksheet.qmd"
+
+website:
+  title: "Deep Learning exercises"
+  site-url: https://healthml.github.io/deep-learning-exercises/
+  search: false
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: exercises/week1/worksheet.qmd
+        text: Week 1
+    right:
+      - icon: github
+        href: https://github.com/HealthML/deep-learning-exercises
+        aria-label: Source repository
+  page-footer:
+    left: "HPI · Deep Learning"
+    right:
+      - text: Source and license
+        href: https://github.com/HealthML/deep-learning-exercises/blob/main/LICENSE.md
+
+format:
+  html:
+    theme:
+      dark: [darkly, styles/worksheet.scss, styles/worksheet-dark.scss]
+      light: [cosmo, styles/worksheet.scss, styles/worksheet-light.scss]
+    respect-user-color-scheme: false
+    html-math-method: mathml
+    embed-resources: true
+    toc: true
+
+execute:
+  enabled: false
