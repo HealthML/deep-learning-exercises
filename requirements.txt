@@ -1,0 +1,2 @@
+# Install this repository and the dependencies declared in pyproject.toml.
+-e .

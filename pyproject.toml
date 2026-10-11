@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "healthml-deep-learning-exercises"
+version = "0.1.0"
+description = "Student exercises for the HPI Deep Learning course"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["torch>=2.3", "matplotlib>=3.8"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+.quarto/
+exercises/week1/output/
+exercises/week1/worksheet.html
+exercises/week1/worksheet_files/
+.DS_Store
