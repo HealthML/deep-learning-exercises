@@ -1,0 +1,10 @@
+/*-- scss:defaults --*/
+// Match the course book's fonts in both appearances.
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-family-monospace: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+/*-- scss:rules --*/
+.quarto-figure img {
+  max-width: 100%;
+  height: auto;
+}
