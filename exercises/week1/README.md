@@ -6,7 +6,8 @@ from the repository root (`deep-learning-exercises`). No book repository, GPU,
 dataset download, Jupyter kernel, or Quarto installation is needed to run the code.
 
 The experiment reproduces the lecture's synthetic sensor data, seed, 40/10/10
-split, residual sign, mean squared loss, and parameter order `[weight, bias]`.
+split, observed-minus-predicted residuals, mean squared loss, and parameter
+order `[weight, bias]`.
 Only the 40 training examples participate in fitting. The 10 validation and 10
 test observations remain separate and are not used for parameter selection here.
 

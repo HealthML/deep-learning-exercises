@@ -1,8 +1,10 @@
 """Check the student CLI independently of book packages or instructor fixtures."""
 from __future__ import annotations
 
+import math
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import tempfile
@@ -25,6 +27,15 @@ def main() -> None:
     assert "training examples=40" in run()
     for mode in ("partials", "coordinate", "sgd", "batch", "lstsq", "solve"):
         assert "After:" in run("--model", "affine", "--method", mode, "--steps", "3")
+    # The residual convention changes the signs in the analytical formulas.
+    # Check them independently against the CLI's centered finite differences.
+    partials = run("--model", "affine", "--method", "partials", "--w", "0.7", "--b", "-0.2")
+    derivatives = re.findall(
+        r"dL/d([wb]): finite difference=([-\d.]+), formula=([-\d.]+)", partials
+    )
+    assert [name for name, _, _ in derivatives] == ["w", "b"]
+    for name, numerical, analytical in derivatives:
+        assert math.isclose(float(numerical), float(analytical), abs_tol=2e-6), name
     assert run("--model", "affine", "--method", "sgd", "--steps", "3") == run(
         "--model", "affine", "--method", "sgd", "--steps", "3")
     run("--b", "1", expected=2)
@@ -35,7 +46,7 @@ def main() -> None:
         image = Path(directory) / "fit.png"
         run("--w", "1", "--save", str(image))
         assert image.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
-    print("All experiment modes, repeatable sampling, invalid arguments, and PNG export pass.")
+    print("All experiment modes, gradient checks, repeatable sampling, invalid arguments, and PNG export pass.")
 
 
 if __name__ == "__main__":
