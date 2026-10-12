@@ -21,7 +21,7 @@ to switch between the black and light backgrounds.
 
 | Session | Material |
 |---|---|
-| Week 1: fitting a line | [Open the worksheet](exercises/week1/worksheet.qmd) · [Experiment instructions and commands](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week1/README.md) |
+| Week 1: fitting a line | [Open the worksheet](exercises/week01/worksheet.qmd) · [Experiment instructions and commands](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week01/README.md) |
 
 The runnable scripts, source worksheets, and figures are available in the
 [student repository](https://github.com/HealthML/deep-learning-exercises).

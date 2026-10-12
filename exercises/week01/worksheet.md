@@ -1,17 +1,6 @@
----
-title: "Week 1 classroom worksheet"
-description: "Predict, try a parameter, explain a derivative, then compare fitting rules."
-format:
-  html:
-    html-math-method: mathml
-    embed-resources: true
-execute:
-  enabled: false
----
-
 Work in pairs: one person operates the computer; the other predicts and records.
 Switch roles after three trials. Follow the setup in
-[the exercise README](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week1/README.md).
+[the exercise README](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week01/README.md).
 No earlier reading is assumed. The lecturer will introduce each next task.
 
 ## 1. A model with one adjustable number — 5 minutes
@@ -23,9 +12,9 @@ Before running anything, sketch what the line does when $w$ increases. Which
 point belongs to every possible line in this model? Then run at most three trials:
 
 ```sh
-python exercises/week1/starter.py --w 0 --plot
-python exercises/week1/starter.py --w 1 --plot
-python exercises/week1/starter.py --w 2 --plot
+python exercises/week01/starter.py --w 0 --plot
+python exercises/week01/starter.py --w 1 --plot
+python exercises/week01/starter.py --w 2 --plot
 ```
 
 | Trial | Weight $w$ | What you predicted | What you observed | Printed score |
@@ -43,8 +32,8 @@ Now use $\hat y=wx+b$. Predict the separate effects of changing $w$ and $b$.
 Try one pair, then change **only one** parameter:
 
 ```sh
-python exercises/week1/starter.py --model affine --w 1.5 --b 0 --plot
-python exercises/week1/starter.py --model affine --w 1.5 --b 0.5 --plot
+python exercises/week01/starter.py --model affine --w 1.5 --b 0 --plot
+python exercises/week01/starter.py --model affine --w 1.5 --b 0.5 --plot
 ```
 
 Write your best pair: $w=$ ______, $b=$ ______. Keep the training and held-out
@@ -74,7 +63,7 @@ the weight a small amount in both directions while keeping the bias unchanged.
 Compare your explanation with:
 
 ```sh
-python exercises/week1/starter.py --model affine --method partials --w 0.5 --b 0
+python exercises/week01/starter.py --model affine --method partials --w 0.5 --b 0
 ```
 
 The script uses a centered finite difference. Explain why changing the bias at
@@ -93,7 +82,7 @@ changes in one step, and when it stops. Compare your rule with another pair.
 The lecturer will derive the coordinate updates before you run:
 
 ```sh
-python exercises/week1/starter.py --model affine --method coordinate --steps 5
+python exercises/week01/starter.py --model affine --method coordinate --steps 5
 ```
 
 ## 5. Read a gradient vector — guided discussion
@@ -123,9 +112,9 @@ $-2r_i x_i$ and $-2r_i$. Compute **both** at the old parameters, then change bot
 parameters together. The script samples uniformly, with replacement.
 
 ```sh
-python exercises/week1/starter.py --model affine --method sgd --lr 0.025 --steps 1
-python exercises/week1/starter.py --model affine --method sgd --lr 0.025 --steps 40
-python exercises/week1/starter.py --model affine --method batch --lr 0.1 --steps 1
+python exercises/week01/starter.py --model affine --method sgd --lr 0.025 --steps 1
+python exercises/week01/starter.py --model affine --method sgd --lr 0.025 --steps 40
+python exercises/week01/starter.py --model affine --method batch --lr 0.1 --steps 1
 ```
 
 What information is needed by one SGD update? By one batch update? If one
@@ -141,7 +130,7 @@ Build $A$ with a column of sensor readings and a column of ones. Solve
 $\min_\theta\|A\theta-y\|_2^2$ with $\theta=[w,b]^T$:
 
 ```sh
-python exercises/week1/starter.py --model affine --method lstsq
+python exercises/week01/starter.py --model affine --method lstsq
 ```
 
 How does this result compare with your hand-chosen pair? Why can this particular

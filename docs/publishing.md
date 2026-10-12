@@ -28,7 +28,10 @@ Use **Deep Learning classroom exercises** as the name and this External URL:
 
 For a link to just the Week 1 worksheet, use:
 
-<https://healthml.github.io/deep-learning-exercises/exercises/week1/worksheet.html>
+<https://healthml.github.io/deep-learning-exercises/exercises/week01/worksheet.html>
+
+The previous `/exercises/week1/worksheet.html` address redirects to this page,
+so existing Moodle links continue to work.
 
 Choose **Open** or **New window** under Appearance so students can use the full
 page. Later changes appear at the same address after a successful deployment.
@@ -40,8 +43,9 @@ the site on pull requests to catch rendering errors. Merging into `main` renders
 and publishes the site automatically. The existing exercise checks still run
 separately. A failed build does not replace the previously published site.
 
-To add another worksheet, put it at `exercises/weekN/worksheet.qmd` and add a
-link in `index.qmd`. The render list already includes that path pattern.
+To add another worksheet, use a two-digit week folder, such as
+`exercises/week02/worksheet.qmd` through `exercises/week15/worksheet.qmd`,
+and add a link in `index.qmd`. The render list already includes that path pattern.
 
 For a local preview, install Quarto and run these commands from the repository
 root:
@@ -56,7 +60,7 @@ To render without starting a preview server:
 quarto render --to html
 ```
 
-Open `_site/index.html` or `_site/exercises/week1/worksheet.html`. The website
+Open `_site/index.html` or `_site/exercises/week01/worksheet.html`. The website
 shares the black and light themes; equations use native MathML. Each HTML page
 embeds its styles and images for offline reading. Keep generated `_site/`
 output out of version control.

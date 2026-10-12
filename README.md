@@ -3,8 +3,8 @@
 Student material for the HPI Deep Learning course, taught by Christoph Lippert
 with Noel Danz, Pedro De Macedo Gomes, and Anees Hashmi.
 
-Start with [Week 1: fitting a line](exercises/week1/README.md) and its
-[worksheet](exercises/week1/worksheet.md). The repository includes the runnable
+Start with [Week 1: fitting a line](exercises/week01/README.md) and its
+[worksheet](exercises/week01/worksheet.md). The repository includes the runnable
 experiment, its synthetic data generator, and the lecture figures. It works
 independently of the book repository. Instructor notes and worksheet answer keys
 are maintained separately.
@@ -23,7 +23,7 @@ cd deep-learning-exercises
 
 For an existing checkout, commit or save your own changes before updating with
 `git pull --ff-only`. You can change the starter locally or keep experiment copies
-under `exercises/week1/output/`.
+under `exercises/week01/output/`.
 
 ## Install Python and create an environment
 
@@ -41,7 +41,7 @@ python -m pip install --upgrade pip
 python -m pip install torch
 python -m pip install -e .
 python tools/check_setup.py
-python exercises/week1/starter.py
+python exercises/week01/starter.py
 ```
 
 macOS uses the normal PyTorch package index. All tensors in Week 1 stay on CPU.
@@ -55,7 +55,7 @@ python -m pip install --upgrade pip
 python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
 python -m pip install -e .
 python tools/check_setup.py
-python exercises/week1/starter.py
+python exercises/week01/starter.py
 ```
 
 ### Windows PowerShell
@@ -69,7 +69,7 @@ py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cpu
 .\.venv\Scripts\python.exe -m pip install -e .
 .\.venv\Scripts\python.exe tools/check_setup.py
-.\.venv\Scripts\python.exe exercises/week1/starter.py
+.\.venv\Scripts\python.exe exercises/week01/starter.py
 ```
 
 Use `.\.venv\Scripts\python.exe` in place of `python` in the worksheet commands.
@@ -104,10 +104,10 @@ On Windows, continue using `.\.venv\Scripts\python.exe` directly.
 
 | Path | Purpose |
 |---|---|
-| `exercises/week1/starter.py` | Manual parameter trials and guided fitting experiments |
-| `exercises/week1/worksheet.md` | Questions and spaces for your explanations |
-| `exercises/week1/worksheet.qmd` | Optional Quarto source of the same worksheet |
-| `exercises/week1/figures/` | Lecture visuals accompanying the worksheet |
+| `exercises/week01/starter.py` | Manual parameter trials and guided fitting experiments |
+| `exercises/week01/worksheet.md` | Questions and spaces for your explanations |
+| `exercises/week01/worksheet.qmd` | Optional Quarto source of the same worksheet |
+| `exercises/week01/figures/` | Lecture visuals accompanying the worksheet |
 | `src/dlexercises/data.py` | Reproducible synthetic sensor data |
 | `tools/check_setup.py` | Interpreter, dependency, data, and image-export check |
 | `tools/smoke_check.py` | Run each experiment mode and check CLI/image behavior |
