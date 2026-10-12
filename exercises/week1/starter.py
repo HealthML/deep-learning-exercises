@@ -22,8 +22,9 @@ STEPS = 40
 
 
 def loss(x, y, w, b):
+    """Mean squared residual, with residual = observed minus predicted."""
     prediction = w * x + b
-    residual = prediction - y
+    residual = y - prediction
     return (residual ** 2).mean()
 
 
@@ -59,12 +60,12 @@ def main() -> None:
         epsilon = 1e-5
         # Change only one parameter; keep the other fixed in both evaluations.
         finite_dw = (loss(x, y, w + epsilon, b) - loss(x, y, w - epsilon, b)) / (2 * epsilon)
-        residual = w * x + b - y
-        dw = 2 * (residual * x).mean()
+        residual = y - (w * x + b)
+        dw = -2 * (residual * x).mean()
         print(f"dL/dw: finite difference={finite_dw.item():.6f}, formula={dw.item():.6f}")
         if args.model == "affine":
             finite_db = (loss(x, y, w, b + epsilon) - loss(x, y, w, b - epsilon)) / (2 * epsilon)
-            db = 2 * residual.mean()
+            db = -2 * residual.mean()
             print(f"dL/db: finite difference={finite_db.item():.6f}, formula={db.item():.6f}")
 
     elif args.mode == "coordinate":
@@ -82,8 +83,8 @@ def main() -> None:
             i = torch.randint(len(x), (), generator=rng).item()
             before_sample = loss(x[i:i + 1], y[i:i + 1], w, b).item()
             # Just one example: there is no sum or mean to compute.
-            residual = w * x[i] + b - y[i]
-            dw, db = (2 * residual * x[i]).item(), (2 * residual).item()
+            residual = y[i] - (w * x[i] + b)
+            dw, db = (-2 * residual * x[i]).item(), (-2 * residual).item()
             # These two derivatives use the SAME old (w,b).
             w, b = w - args.lr * dw, b - args.lr * db
             if step == 0 or step == args.steps - 1:
@@ -94,9 +95,9 @@ def main() -> None:
 
     elif args.mode == "batch":
         for step in range(args.steps):
-            residual = w * x + b - y
-            dw = (2 * (residual * x).mean()).item()
-            db = (2 * residual.mean()).item()
+            residual = y - (w * x + b)
+            dw = (-2 * (residual * x).mean()).item()
+            db = (-2 * residual.mean()).item()
             # A simultaneous update: do not recompute db after changing w.
             w, b = w - args.lr * dw, b - args.lr * db
             if step == 0 or step == args.steps - 1:

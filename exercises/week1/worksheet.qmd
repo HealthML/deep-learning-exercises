@@ -53,7 +53,8 @@ sets separate: use only the displayed training measurements for these choices.
 ## 3. Define the loss and check a partial derivative — 3 minutes
 
 After the lecturer introduces least squares, use residual
-$r^{(i)}=wx^{(i)}+b-y^{(i)}$ and
+$r^{(i)}=y^{(i)}-(wx^{(i)}+b)$ (observed minus predicted).
+A positive residual means underprediction. Use the mean squared loss
 
 $$
 L(w,b)=\frac1n\sum_{i=1}^n(r^{(i)})^2.
@@ -107,8 +108,8 @@ pairs. The gradient is
 $$
 \nabla L(w,b)=
 \begin{bmatrix}
-\frac{2}{n}\sum_i r^{(i)}x^{(i)}\\
-\frac{2}{n}\sum_i r^{(i)}
+-\frac{2}{n}\sum_i r^{(i)}x^{(i)}\\
+-\frac{2}{n}\sum_i r^{(i)}
 \end{bmatrix}.
 $$
 
@@ -117,8 +118,8 @@ for minimization? Does doubling the step length always improve the loss?
 
 ## 6. One example, then all examples — guided discussion
 
-For one training example, use $\ell_i(w,b)=(wx_i+b-y_i)^2$. Its derivatives are
-$2r_i x_i$ and $2r_i$. Compute **both** at the old parameters, then change both
+For one training example, use $\ell_i(w,b)=(y_i-(wx_i+b))^2$. Its derivatives are
+$-2r_i x_i$ and $-2r_i$. Compute **both** at the old parameters, then change both
 parameters together. The script samples uniformly, with replacement.
 
 ```sh
