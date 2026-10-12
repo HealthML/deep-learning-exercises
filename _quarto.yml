@@ -13,7 +13,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: exercises/week1/worksheet.qmd
+      - href: exercises/week01/worksheet.qmd
         text: Week 1
     right:
       - icon: github

@@ -16,7 +16,7 @@ test observations remain separate and are not used for parameter selection here.
 ```sh
 python -m compileall -q src exercises
 python tools/check_setup.py
-python exercises/week1/starter.py
+python exercises/week01/starter.py
 ```
 
 On Windows, use `.\.venv\Scripts\python.exe` instead of `python` if you have not
@@ -34,17 +34,17 @@ Begin with the one-parameter model. Edit the constants at the top of the script
 or use command-line options:
 
 ```sh
-python exercises/week1/starter.py --w 0 --plot
-python exercises/week1/starter.py --w 1 --plot
-python exercises/week1/starter.py --w 2 --plot
-python exercises/week1/starter.py --model affine --w 1.5 --b 0.5 --plot
+python exercises/week01/starter.py --w 0 --plot
+python exercises/week01/starter.py --w 1 --plot
+python exercises/week01/starter.py --w 2 --plot
+python exercises/week01/starter.py --model affine --w 1.5 --b 0.5 --plot
 ```
 
 A plot window opens with `--plot`. On a server or another machine without a
 graphical display, save an image instead:
 
 ```sh
-python exercises/week1/starter.py --w 1 --save fit.png
+python exercises/week01/starter.py --w 1 --save fit.png
 ```
 
 If downloads are still running after four minutes in class, pair with a working
@@ -58,11 +58,11 @@ is to explain and compare their behavior; a completed program alone does not
 answer the worksheet.
 
 ```sh
-python exercises/week1/starter.py --model affine --method partials --w 0.5 --b 0
-python exercises/week1/starter.py --model affine --method coordinate --steps 5
-python exercises/week1/starter.py --model affine --method sgd --lr 0.025 --steps 40
-python exercises/week1/starter.py --model affine --method batch --lr 0.1 --steps 40
-python exercises/week1/starter.py --model affine --method lstsq
+python exercises/week01/starter.py --model affine --method partials --w 0.5 --b 0
+python exercises/week01/starter.py --model affine --method coordinate --steps 5
+python exercises/week01/starter.py --model affine --method sgd --lr 0.025 --steps 40
+python exercises/week01/starter.py --model affine --method batch --lr 0.1 --steps 40
+python exercises/week01/starter.py --model affine --method lstsq
 ```
 
 One SGD update processes one example; one batch update processes all 40. Thus 40
@@ -83,7 +83,7 @@ The worksheet is available as Markdown for reading on GitHub and as editable
 [Quarto source](worksheet.qmd). Rendering the worksheet is optional:
 
 ```sh
-quarto render exercises/week1/worksheet.qmd --to html
+quarto render exercises/week01/worksheet.qmd --to html
 ```
 
 The rendered HTML opens with a pure black (`#000000`) background, matching the

@@ -10,7 +10,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-STARTER = ROOT / "exercises/week1/starter.py"
+STARTER = ROOT / "exercises/week01/starter.py"
 
 
 def run(*args: str, expected: int = 0) -> str:
