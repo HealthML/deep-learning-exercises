@@ -9,6 +9,12 @@ experiment, its synthetic data generator, and the lecture figures. It works
 independently of the book repository. Instructor notes and worksheet answer keys
 are maintained separately.
 
+[Week 2: logistic regression](exercises/week02/README.md) includes a runnable
+[student notebook](exercises/week02/logistic_regression.ipynb) and
+[classroom worksheet](exercises/week02/worksheet.md) for two 90-minute sessions.
+It follows Sections 8–10 of the book using the same bundled two-feature WDBC
+dataset, split, and numerical conventions.
+
 Read the rendered [classroom worksheets online](https://healthml.github.io/deep-learning-exercises/).
 Updates are published automatically after merging into `main`. For the one-time
 Pages setup and the permanent link to add in Moodle, see
@@ -72,6 +78,21 @@ From the repository root, continue with `uv run --locked python ...`.
 After updating the repository with `git pull --ff-only`, run `uv sync --locked`
 to apply any dependency changes.
 
+## Week 2 notebooks
+
+Install the optional notebook tools and open the Week 2 experiments:
+
+```sh
+uv sync --locked --group notebook
+uv run --locked --group notebook jupyter lab exercises/week02/logistic_regression.ipynb
+```
+
+Choose this repository's `.venv` as your notebook kernel if prompted. The
+experiments use NumPy and CPU PyTorch; no book package or data download is
+required. All cells run as delivered. The test checkpoint is disabled by default
+until the model, threshold, and written validation work are frozen. See the
+[Week 2 instructions](exercises/week02/README.md).
+
 ## Troubleshooting
 
 - **`uv` is not found:** reopen the terminal after installing uv and follow the
@@ -103,12 +124,18 @@ to apply any dependency changes.
 | `.python-version` | Default Python version managed by uv |
 | `tools/check_setup.py` | Interpreter, dependency, data, and image-export check |
 | `tools/smoke_check.py` | Run each experiment mode and check CLI/image behavior |
+| `exercises/week02/logistic_regression.ipynb` | Prediction-first experiments for two logistic-regression sessions |
+| `exercises/week02/worksheet.md` | Timed pair tasks, individual exit tickets, and optional depth |
+| `src/dlexercises/week02.py` | Transparent logistic loss, derivatives, fitting, and evaluation helpers |
+| `src/dlexercises/datasets/wdbc/` | Bundled two-feature data with attribution and checksums |
+| `tools/check_week02.py` | Execute all notebook cells and check data, derivatives, solvers, and test protection |
 
 You can run the repository checks with:
 
 ```sh
 uv run --locked python -m compileall -q src exercises tools
 uv run --locked python tools/smoke_check.py
+uv run --locked python tools/check_week02.py
 ```
 
 ## Attribution and license
@@ -117,3 +144,8 @@ Week 1 material is adapted from HealthML/deep-learning-book at commit
 `7919dce810877339178c33725e17959c83c02d47` by Christoph Lippert and contributors.
 The dataset and equations match the course book and slides. See [LICENSE.md](LICENSE.md):
 original source code is MIT; prose, exercises, and figures are CC BY-SA 4.0.
+
+Week 2 material and helpers are adapted from Chapter 02 of the same book at
+commit `7803e0bcbbe1b20d7563db09cee97f4976242e6b`. WDBC data is CC BY 4.0;
+the bundled data notes credit Wolberg, Mangasarian, Street, and Street and record
+the UCI DOI, exact extraction, checksums, and book split.

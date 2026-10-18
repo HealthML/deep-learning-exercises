@@ -10,16 +10,23 @@ readme = "README.md"
 requires-python = ">=3.11"
 # Keep PyTorch wheels compatible with macOS 11–13 on Apple Silicon.
 dependencies = [
+  "numpy>=1.26",
   "torch>=2.3,<2.12; sys_platform == 'darwin'",
   "torch>=2.3; sys_platform != 'darwin'",
   "matplotlib>=3.8",
 ]
+
+[dependency-groups]
+notebook = ["jupyterlab>=4.2", "ipykernel>=6.29"]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+dlexercises = ["datasets/wdbc/*.csv", "datasets/wdbc/*.md", "datasets/wdbc/*.yml"]
 
 # Keep the classroom environment on CPU without downloading CUDA dependencies.
 # macOS uses PyPI's native wheels.
