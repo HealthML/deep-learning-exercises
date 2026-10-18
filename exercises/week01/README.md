@@ -1,6 +1,6 @@
 # Week 1: fitting a line
 
-Use **Python 3.11 or newer and PyTorch on CPU**. Follow the platform-specific
+Use **uv with Python 3.11 and PyTorch on CPU**. Follow the
 [installation instructions](../../README.md) first, then run all commands below
 from the repository root (`deep-learning-exercises`). No book repository, GPU,
 dataset download, Jupyter kernel, or Quarto installation is needed to run the code.
@@ -14,14 +14,14 @@ test observations remain separate and are not used for parameter selection here.
 ## Check your installation
 
 ```sh
-python -m compileall -q src exercises
-python tools/check_setup.py
-python exercises/week01/starter.py
+uv run --locked python -m compileall -q src exercises
+uv run --locked python tools/check_setup.py
+uv run --locked python exercises/week01/starter.py
 ```
 
-On Windows, use `.\.venv\Scripts\python.exe` instead of `python` if you have not
-activated the environment. The default run reports the PyTorch version, CPU
-device, float64 precision, and training-set size. It starts with a zero slope and
+The same `uv run --locked` commands work on macOS, Linux, and Windows.
+The default run reports the PyTorch version, CPU device, float64 precision, and
+training-set size. It starts with a zero slope and
 zero bias. `compileall` checks Python syntax; it does not train a model.
 
 ## Classroom experiment
@@ -34,17 +34,17 @@ Begin with the one-parameter model. Edit the constants at the top of the script
 or use command-line options:
 
 ```sh
-python exercises/week01/starter.py --w 0 --plot
-python exercises/week01/starter.py --w 1 --plot
-python exercises/week01/starter.py --w 2 --plot
-python exercises/week01/starter.py --model affine --w 1.5 --b 0.5 --plot
+uv run --locked python exercises/week01/starter.py --w 0 --plot
+uv run --locked python exercises/week01/starter.py --w 1 --plot
+uv run --locked python exercises/week01/starter.py --w 2 --plot
+uv run --locked python exercises/week01/starter.py --model affine --w 1.5 --b 0.5 --plot
 ```
 
 A plot window opens with `--plot`. On a server or another machine without a
 graphical display, save an image instead:
 
 ```sh
-python exercises/week01/starter.py --w 1 --save fit.png
+uv run --locked python exercises/week01/starter.py --w 1 --save fit.png
 ```
 
 If downloads are still running after four minutes in class, pair with a working
@@ -58,11 +58,11 @@ is to explain and compare their behavior; a completed program alone does not
 answer the worksheet.
 
 ```sh
-python exercises/week01/starter.py --model affine --method partials --w 0.5 --b 0
-python exercises/week01/starter.py --model affine --method coordinate --steps 5
-python exercises/week01/starter.py --model affine --method sgd --lr 0.025 --steps 40
-python exercises/week01/starter.py --model affine --method batch --lr 0.1 --steps 40
-python exercises/week01/starter.py --model affine --method lstsq
+uv run --locked python exercises/week01/starter.py --model affine --method partials --w 0.5 --b 0
+uv run --locked python exercises/week01/starter.py --model affine --method coordinate --steps 5
+uv run --locked python exercises/week01/starter.py --model affine --method sgd --lr 0.025 --steps 40
+uv run --locked python exercises/week01/starter.py --model affine --method batch --lr 0.1 --steps 40
+uv run --locked python exercises/week01/starter.py --model affine --method lstsq
 ```
 
 One SGD update processes one example; one batch update processes all 40. Thus 40

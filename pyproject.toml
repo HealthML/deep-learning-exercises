@@ -8,10 +8,27 @@ version = "0.1.0"
 description = "Student exercises for the HPI Deep Learning course"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["torch>=2.3", "matplotlib>=3.8"]
+# Keep PyTorch wheels compatible with macOS 11–13 on Apple Silicon.
+dependencies = [
+  "torch>=2.3,<2.12; sys_platform == 'darwin'",
+  "torch>=2.3; sys_platform != 'darwin'",
+  "matplotlib>=3.8",
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+# Keep the classroom environment on CPU without downloading CUDA dependencies.
+# macOS uses PyPI's native wheels.
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

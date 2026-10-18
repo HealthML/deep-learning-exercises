@@ -27,76 +27,66 @@ under `exercises/week01/output/`.
 
 ## Install Python and create an environment
 
-Use **Python 3.11 or newer**. Check `python3 --version` (Windows: `py --version`).
-If Python is missing, install it from [python.org](https://www.python.org/downloads/).
-Run the setup from the repository root. The virtual environment keeps course
-packages separate from your other Python projects.
+Use [uv](https://docs.astral.sh/uv/) to manage Python and the course packages.
+Install it once using the [official installation instructions](https://docs.astral.sh/uv/getting-started/installation/):
 
-### macOS
+### macOS and Linux
 
 ```sh
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install torch
-python -m pip install -e .
-python tools/check_setup.py
-python exercises/week01/starter.py
-```
-
-macOS uses the normal PyTorch package index. All tensors in Week 1 stay on CPU.
-
-### Linux
-
-```sh
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -e .
-python tools/check_setup.py
-python exercises/week01/starter.py
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 ### Windows PowerShell
 
-These commands use the environment directly and do not require changing
-PowerShell's script-execution settings:
-
 ```powershell
-py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-.\.venv\Scripts\python.exe -m pip install -e .
-.\.venv\Scripts\python.exe tools/check_setup.py
-.\.venv\Scripts\python.exe exercises/week01/starter.py
+winget install --id=astral-sh.uv -e
 ```
 
-Use `.\.venv\Scripts\python.exe` in place of `python` in the worksheet commands.
-Linux and Windows install CPU wheels to avoid unnecessary GPU dependencies.
-See the [official PyTorch installer](https://pytorch.org/get-started/locally/) for
-platform-specific alternatives.
+Open a new terminal after installation so `uv` is available on your `PATH`.
+Then run these commands from the repository root on **all platforms**:
+
+```sh
+uv sync --locked
+uv run --locked python tools/check_setup.py
+uv run --locked python exercises/week01/starter.py
+```
+
+`uv sync --locked` downloads Python 3.11 if needed, creates `.venv`, and installs
+the student package in editable mode together with the exact dependency versions
+in `uv.lock`. Python 3.11 is the default in `.python-version`; CI also checks
+Python 3.12 and 3.13. No separate Python installation or environment activation
+is required. Use `uv run --locked python ...` for worksheet commands on every
+platform, including Windows PowerShell.
+
+The project selects CPU-only PyTorch wheels on Linux and Windows; macOS uses
+PyPI. On macOS, the PyTorch dependency supports Apple Silicon with macOS 11 or
+newer. All tensors in Week 1 stay on CPU. The dependency and index settings live
+in `pyproject.toml`, so setup and CI use the same choices.
+
+If you already have a `.venv` from the previous setup, `uv sync --locked` updates
+it. If it uses a different Python version, uv recreates it for Python 3.11.
 
 ## In a new terminal
 
-From the repository root, activate the existing environment on macOS/Linux:
-
-```sh
-. .venv/bin/activate
-```
-
-On Windows, continue using `.\.venv\Scripts\python.exe` directly.
+From the repository root, continue with `uv run --locked python ...`.
+After updating the repository with `git pull --ff-only`, run `uv sync --locked`
+to apply any dependency changes.
 
 ## Troubleshooting
 
-- **`No module named dlexercises`:** activate the environment used for installation
-  and run `python -m pip install -e .` from the repository root. Then check with
-  `python tools/check_setup.py`. The script reports the interpreter and package
-  location so you can identify an environment mismatch.
+- **`uv` is not found:** reopen the terminal after installing uv and follow the
+  installer's `PATH` instructions.
+- **`No module named dlexercises`:** run `uv sync --locked` from the repository
+  root and use `uv run --locked python tools/check_setup.py`. The script reports
+  the interpreter and package location so you can identify an environment mismatch.
+- **The lockfile needs updating:** after changing dependencies, use `uv add`
+  (or `uv remove`) and commit both `pyproject.toml` and `uv.lock`. For an intentional
+  dependency refresh, run `uv lock --upgrade`, `uv sync --locked`, and the checks
+  below before committing the updated lockfile.
 - **No plot window:** use `--save fit.png` instead of `--plot`; on Linux servers,
   set `MPLBACKEND=Agg` if needed. A graphical desktop is needed for a plot window.
-- **No compatible PyTorch wheel:** check your Python version and platform against
-  the official installer. Use an interpreter supported by the available wheel.
+- **No compatible PyTorch wheel:** use the pinned Python 3.11 environment and
+  check your platform against the [official PyTorch installer](https://pytorch.org/get-started/locally/).
 - **Quarto or Jupyter is missing:** both are optional for this initial exercise.
   Read the Markdown worksheet and run the Python script directly.
 
@@ -109,14 +99,16 @@ On Windows, continue using `.\.venv\Scripts\python.exe` directly.
 | `exercises/week01/worksheet.qmd` | Optional Quarto source of the same worksheet |
 | `exercises/week01/figures/` | Lecture visuals accompanying the worksheet |
 | `src/dlexercises/data.py` | Reproducible synthetic sensor data |
+| `pyproject.toml` / `uv.lock` | Dependencies, platform-specific PyTorch index, and exact versions |
+| `.python-version` | Default Python version managed by uv |
 | `tools/check_setup.py` | Interpreter, dependency, data, and image-export check |
 | `tools/smoke_check.py` | Run each experiment mode and check CLI/image behavior |
 
 You can run the repository checks with:
 
 ```sh
-python -m compileall -q src exercises tools
-python tools/smoke_check.py
+uv run --locked python -m compileall -q src exercises tools
+uv run --locked python tools/smoke_check.py
 ```
 
 ## Attribution and license
