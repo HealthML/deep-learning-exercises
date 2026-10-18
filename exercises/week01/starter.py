@@ -1,6 +1,7 @@
 """Week 1 classroom experiment: change constants or pass command-line options.
 
-Run from the repository root after ``python -m pip install -e .``.
+After ``uv sync --locked``, run from the repository root with
+``uv run --locked python exercises/week01/starter.py``.
 The mathematical mechanisms stay visible here; only data creation is shared.
 """
 from __future__ import annotations
