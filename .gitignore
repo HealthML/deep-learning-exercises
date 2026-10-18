@@ -9,7 +9,9 @@ dist/
 /.quarto/
 /_site/
 **/*.quarto_ipynb
-exercises/week01/output/
+exercises/**/output/
 exercises/week01/worksheet.html
 exercises/week01/worksheet_files/
+exercises/week02/worksheet.html
+exercises/week02/worksheet_files/
 .DS_Store

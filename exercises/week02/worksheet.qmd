@@ -1,0 +1,6 @@
+---
+title: "Week 2: Logistic regression in class"
+description: "Two classroom sessions on probabilities, likelihood, scaling, Newton updates, and evaluation."
+---
+
+{{< include worksheet.md >}}
