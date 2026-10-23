@@ -11,7 +11,7 @@ run the experiment, and record your explanation with your partner.
 
 [Follow the installation instructions](https://github.com/HealthML/deep-learning-exercises#install-python-and-create-an-environment)
 to clone the student repository and install Python and PyTorch. The code runs
-on CPU; no GPU or dataset download is needed for either week.
+on CPU; no GPU or dataset download is needed for these exercises.
 
 You can read the worksheets here in your browser. Quarto is only needed if you
 want to render them yourself. Use the appearance toggle in the navigation bar
@@ -23,6 +23,7 @@ to switch between the black and light backgrounds.
 |---|---|
 | Week 1: fitting a line | [Open the worksheet](exercises/week01/worksheet.qmd) · [Experiment instructions and commands](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week01/README.md) |
 | Week 2: logistic regression | [Open the worksheet](exercises/week02/worksheet.qmd) · [Notebook and setup](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week02/README.md) |
+| Week 3: optimization and regularization | [Open the worksheet](exercises/week03/worksheet.qmd) · [Notebook and setup](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week03/README.md) |
 
 The runnable scripts, source worksheets, and figures are available in the
 [student repository](https://github.com/HealthML/deep-learning-exercises).

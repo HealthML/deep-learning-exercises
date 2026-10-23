@@ -32,3 +32,5 @@ jobs:
         run: uv run --locked python tools/smoke_check.py
       - name: Run Week 2 notebook and numerical checks
         run: uv run --locked python tools/check_week02.py
+      - name: Run Week 3 notebook and numerical checks
+        run: uv run --locked python tools/check_week03.py

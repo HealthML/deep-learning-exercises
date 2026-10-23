@@ -78,7 +78,12 @@ From the repository root, continue with `uv run --locked python ...`.
 After updating the repository with `git pull --ff-only`, run `uv sync --locked`
 to apply any dependency changes.
 
-## Week 2 notebooks
+## Notebooks (weeks 2–3)
+
+Week 3 has a separate [paper worksheet and guided optimization notebook](exercises/week03/README.md)
+for a 95-minute session. Its paper and coding tasks are complementary.
+Use the same notebook environment below and open `exercises/week03/optimization.ipynb`
+instead of the Week 2 notebook. Check it with `uv run --locked python tools/check_week03.py`.
 
 Install the optional notebook tools and open the Week 2 experiments:
 
