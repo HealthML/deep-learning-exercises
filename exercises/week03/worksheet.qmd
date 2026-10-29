@@ -1,6 +1,6 @@
 ---
 title: "Week 3: Diagnose and Improve Training"
-description: "A 95-minute session connecting gradient calculations, optimizer experiments, and generalization."
+description: "A 63-minute core session on optimization, with 32 minutes of optional work on gradient noise and generalization."
 ---
 
 Why is a model not learning well, and what should we change? This session connects predictions made on paper with controlled experiments in a notebook. The model is linear; no neural networks or backpropagation knowledge is required.
@@ -13,13 +13,13 @@ Read the [optimization and regularization chapter](https://healthml.github.io/de
 |----------------------------------|--------------------|-----------------:|
 | 1\. Predict the update                   | This worksheet, on paper |      18 |
 | 2\. Repair the optimizer                 | Notebook                 |      25 |
-| 3\. Investigate gradient noise           | Notebook                 |      15 |
-| 4\. Separate fitting from generalization | Notebook                 |      17 |
+| 3\. Optional: investigate gradient noise | Notebook                 |      15 |
+| 4\. Optional: fitting and generalization | Notebook                 |      17 |
 | 5\. Diagnose unfamiliar runs             | This worksheet, on paper |      20 |
 
-Total: **95 minutes**. Work in pairs during experiments and switch who operates the computer after each activity. Write a prediction before running a comparison. The final response is individual.
+The **core route is 63 minutes** (activities 1, 2, and 5). Optional notebook activities 3–4 add 32 minutes; completing all activities takes **95 minutes**. Work in pairs during experiments and switch who operates the computer after each activity. Write a prediction before running a comparison. The final response is individual.
 
-Install the environment using the [Week 3 setup instructions](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week03/README.md). Open [the notebook](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week03/optimization.ipynb) for activities 2–4; all their questions and response spaces are there. If setup is not working at the start, pair with a working machine.
+Install the environment using the [Week 3 setup instructions](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week03/README.md). Open [the notebook](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week03/optimization.ipynb) for core activity 2 through RMSProp; activities 3–4 are optional extensions. Questions and response spaces are in the notebook. If setup is not working at the start, pair with a working machine.
 
 ## 1. Predict the update
 
@@ -66,9 +66,9 @@ More generally, a sequence $a_{t+1}=qa_t$ approaches zero from every starting va
 Using this fact, find the positive learning rates for which **both** coordinates converge to zero from any starting point. Check whether the rates in question 2 fall within your range.
 :::
 
-## 2–4. Guided experiments — notebook
+## 2. Core experiment and optional extensions — notebook
 
-Continue in `optimization.ipynb`. Its three activities use the predictions above, then introduce a synthetic regression dataset. Record experimental answers in the notebook; there is no duplicate questionnaire here.
+Continue in `optimization.ipynb` through the RMSProp comparison for the core optimizer activity. If time allows, activities 3–4 are optional extensions: minibatch noise, then regularization and generalization. They introduce a synthetic regression dataset. Record experimental answers in the notebook; there is no duplicate questionnaire here.
 
 ## 5. Diagnose unfamiliar runs
 
