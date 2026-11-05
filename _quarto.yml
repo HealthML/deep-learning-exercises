@@ -19,6 +19,8 @@ website:
         text: Week 2
       - href: exercises/week03/worksheet.qmd
         text: Week 3
+      - href: exercises/week5/worksheet.qmd
+        text: Week 5
     right:
       - icon: github
         href: https://github.com/HealthML/deep-learning-exercises

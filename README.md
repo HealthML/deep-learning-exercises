@@ -78,7 +78,14 @@ From the repository root, continue with `uv run --locked python ...`.
 After updating the repository with `git pull --ff-only`, run `uv sync --locked`
 to apply any dependency changes.
 
-## Notebooks (weeks 2–3)
+## Notebooks (weeks 2–3 and 5)
+
+[Week 5: CNNs and residual blocks](exercises/week5/README.md) is a
+lab from NumPy convolution and pooling to a trained PyTorch CNN, residual
+shortcuts, and translation robustness. Open `exercises/week5/experiments.ipynb`
+in the same environment below. Students complete coding gaps; supplied data and
+training helpers need no additional dependencies or dataset downloads. Check the
+starter and infrastructure with `uv run --locked python tools/check_week05.py`.
 
 Week 3 has a separate [paper worksheet and guided optimization notebook](exercises/week03/README.md)
 for a 95-minute session. Its paper and coding tasks are complementary.

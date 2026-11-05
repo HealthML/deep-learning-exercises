@@ -1,0 +1,181 @@
+---
+title: "Week 5: Build, test, and train a small CNN"
+description: "A lab from NumPy convolution to a trained CNN, residual shortcuts, and translation robustness."
+---
+
+Can an inspection camera recognise an **L, T, or + symbol when it moves**?
+Implement a few building blocks, test them, then use PyTorch to assemble and
+train a complete model. The images are synthetic: this is a controlled study,
+not a claim about deployment performance.
+
+Read Lesson 5: CNNs, ResNets, and Augmentation beforehand. Prerequisites: NumPy
+indexing and loops, basic PyTorch modules, cross-entropy, and the chain rule.
+Follow the [setup instructions](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week5/README.md)
+and open the [student notebook](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week5/experiments.ipynb).
+
+## Session route
+
+| Activity | Location |
+|---|---|
+| 1. Predict and implement convolution | Paper warm-up below, then notebook |
+| 2. Implement max pooling | Notebook |
+| 3. Build the PyTorch CNN | Notebook |
+| 4. Train and inspect learning | Notebook |
+| 5. Implement and test a residual block | Notebook |
+| 6. Investigate shifts, recommend, and reflect | Notebook, then final questions below |
+
+Work in pairs. Switch driver after activity 2. Write a prediction before running
+an experiment, then record evidence and an explanation in the notebook. The
+final response is individual. Training the residual classifier is optional.
+
+## 1. Pen and paper: convolution and output shapes
+
+Work through these questions before running the corresponding notebook cells.
+Show your calculations, including the image patch used for each convolution
+output. Use cross-correlation: apply the kernel directly, without flipping it.
+
+### 1A. Slide a kernel by hand
+
+Use stride 1, no padding, and bias 0:
+
+$$
+X=\begin{bmatrix}1&1&0\\1&0&0\\1&1&1\end{bmatrix},
+\qquad K=\begin{bmatrix}1&-1\\1&-1\end{bmatrix}.
+$$
+
+1. Predict the output height and width. How many positions can the kernel visit?
+2. Calculate **every value** of the output matrix. For the top-left output,
+   explicitly write the four products and their sum.
+3. Add a bias of $-1$ to every output, then apply ReLU. Write the new output
+   matrix. At which positions does ReLU change the value?
+4. Return to bias 0. Add one row or column of zeros to **each side** of $X$
+   (padding 1) and use stride 2. Draw the padded image, mark the four kernel
+   positions, and calculate the complete output. Why is this different from
+   simply taking every second value of the unpadded output?
+
+**Your calculations:**
+
+................................................................................
+
+................................................................................
+
+### 1B. Calculate the output size
+
+For a convolution with dilation 1, calculate each spatial dimension using
+
+$$
+O=\left\lfloor\frac{I+2P-K}{S}\right\rfloor+1.
+$$
+
+Here $I$ is the input size, $K$ the kernel size, $P$ the padding on **each side**,
+and $S$ the stride. Apply the formula separately to height and width. Round down
+before adding 1. A kernel must fit within the padded input.
+
+Complete the table without running code. These are spatial sizes only; channels
+are considered in the next task. Padding and stride are the same in both axes.
+
+| Input $H\times W$ | Kernel $K_h\times K_w$ | Padding | Stride | Output $H_{\mathrm{out}}\times W_{\mathrm{out}}$ |
+|---|---|---:|---:|---|
+| $5\times5$ | $3\times3$ | 0 | 1 | … |
+| $5\times5$ | $3\times3$ | 1 | 1 | … |
+| $6\times6$ | $3\times3$ | 1 | 2 | … |
+| $8\times10$ | $3\times5$ | 0 | 2 | … |
+
+1. Show the formula substitution for the third row. Why do we need the floor?
+2. For a $3\times3$ kernel with stride 1, what padding preserves spatial size?
+3. If you double the number of filters, does the output height or width change?
+
+### 1C. Channels and learned parameters
+
+A convolution receives an RGB image of shape $3\times32\times32$. It has
+**8 filters**, each covering all 3 input channels, with $3\times3$ spatial
+kernels, stride 1, padding 1, and one bias per filter. Shapes here are
+$C\times H\times W$; the batch dimension is omitted.
+
+1. Give the output shape and the shape of the complete weight tensor.
+2. How many weights are in **one filter**? Calculate the total learned parameter
+   count, including biases, using
+   $K_hK_wC_{\mathrm{in}}C_{\mathrm{out}}+C_{\mathrm{out}}$.
+3. Does each filter produce three separate output feature maps, or combine the
+   three input channels into one? Explain how their contributions are combined.
+4. Repeat the output shape and parameter count for a $3\times64\times64$ input.
+   Which quantities change, and why?
+
+### 1D. Trace the notebook CNN
+
+Return to the **single-channel** symbols. A batch contains 4 images, so the input
+shape is $(4,1,32,32)$. Complete the shapes using $(N,C,H,W)$ until global average
+pooling; afterwards use $(N,C)$.
+
+| Operation | Output shape, including batch |
+|---|---|
+| Input | $(4,1,32,32)$ |
+| Conv $3\times3$, $1\to8$, padding 1, stride 1; ReLU | … |
+| Max pool $2\times2$, stride 2, no padding | … |
+| Conv $3\times3$, $8\to16$, padding 1, stride 1; ReLU | … |
+| Max pool $2\times2$, stride 2, no padding | … |
+| Global average pooling over height and width | … |
+| Linear layer, 3 class logits | … |
+
+1. Calculate the parameter count of the second convolution, including biases.
+2. Which operations in the table have no learned parameters?
+3. If an edge moves right, what should happen to its convolutional feature-map
+   response away from boundaries? Does that guarantee unchanged class logits
+   after the remaining operations?
+
+**Optional challenge:** calculate the receptive field just after the second
+max pool. Start with receptive field $r=1$ and input spacing $j=1$. At each
+convolution or pooling layer, update $r\leftarrow r+(K-1)j$ using the **old** $j$,
+then $j\leftarrow jS$. ReLU does not change either quantity.
+
+Continue in notebook activity 1. In activities 1–2 you implement forward
+operations only; PyTorch computes gradients when the full model trains.
+
+## 2–6. Notebook investigation
+
+The notebook contains the coding tasks and experimental response spaces. Use
+your paper calculations from 1D to check the CNN implementation; you do not need
+to repeat them. Before implementing the residual block, predict both branches'
+shapes for the identity shortcut. As a follow-up, explain what a projection
+would need to change if the branch changed resolution and channels.
+
+Training uses only the training split. Checkpoints use centered-validation loss;
+shifted validation provides diagnostic evidence and may inform your final
+configuration choice. Centered and shifted test sets remain unused until you
+freeze that choice and your written recommendation.
+
+## Final diagnosis and individual reflection
+
+1. A model's training loss falls while validation loss rises. Another model does
+   well on centered images but poorly on shifted images. Give one plausible
+   explanation and one targeted next experiment for **each** case. Are these
+   necessarily the same problem?
+2. A colleague claims, “Our small residual model scored higher, so shortcuts
+   caused the improvement.” What else changed in the notebook's two models?
+   Propose a comparison that isolates the shortcut more carefully.
+3. **Individual response:** cite one measured result supporting your chosen
+   configuration, explain one relevant CNN design choice, and name one untested
+   condition under which the system might fail. What evidence would you seek
+   before using it with a real inspection camera?
+
+If augmentation did not improve shifted accuracy, explain the observed result.
+A high score, a confident prediction, or a changed filter tensor alone does not
+establish general robustness.
+
+## Optional transfer: the wrong clue
+
+Suppose a corner marker predicts the training label. Design paired evaluation
+images with identical symbols but different markers. What observation would
+support reliance on the marker? Propose one intervention and state what stays
+fixed in your comparison.
+
+## Sources and conventions
+
+These exercises accompany the supplied Lesson 5: CNNs, ResNets, and Augmentation.
+Images are original, locally generated synthetic symbols with balanced classes.
+Implementation shapes use NCHW; convolution denotes cross-correlation. The
+residual task uses a simplified post-activation block without BatchNorm: its zero-branch output is
+$\operatorname{ReLU}(x)$ for a matching identity shortcut. The small residual
+classifier is not ResNet-18. See the chapter for literature references and the
+[repository license](https://github.com/HealthML/deep-learning-exercises/blob/main/LICENSE.md)
+for reuse terms.
