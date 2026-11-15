@@ -78,7 +78,14 @@ From the repository root, continue with `uv run --locked python ...`.
 After updating the repository with `git pull --ff-only`, run `uv sync --locked`
 to apply any dependency changes.
 
-## Notebooks (weeks 2–3 and 5)
+## Notebooks (weeks 2–3, 5–6)
+
+[Week 6: U-Net and transfer learning](exercises/week6/README.md) pairs a
+[classroom worksheet](exercises/week6/worksheet.qmd) with
+`exercises/week6/transfer_learning_unet.ipynb`. Build a segmentation model,
+reuse a classification encoder, compare freezing with fine-tuning, and
+investigate skip connections. It uses the same notebook environment below;
+data are generated locally and no additional dependencies are needed.
 
 [Week 5: CNNs and residual blocks](exercises/week5/README.md) is a
 lab from NumPy convolution and pooling to a trained PyTorch CNN, residual

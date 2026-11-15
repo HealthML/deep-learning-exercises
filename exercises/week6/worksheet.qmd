@@ -1,0 +1,8 @@
+---
+title: "Week 6: U-Net and transfer learning"
+---
+
+Build a U-Net for image segmentation and reuse a pretrained encoder.
+Compare training from scratch, freezing, and fine-tuning, and explore skip connections.
+
+Complete the exercises in the [Week 6 notebook](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week6/transfer_learning_unet.ipynb).
