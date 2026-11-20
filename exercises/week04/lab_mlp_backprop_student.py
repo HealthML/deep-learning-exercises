@@ -24,6 +24,20 @@ def _():
     return mo, np, plt, torch
 
 
+@app.cell
+def _(torch):
+
+    print("MPS built:", torch.backends.mps.is_built())
+    print("MPS available:", torch.backends.mps.is_available())
+
+    if torch.backends.mps.is_available():
+        x = torch.randn(1024, 1024, device="mps")
+        y = x @ x
+        torch.mps.synchronize()
+        print("Computation ran on:", y.device)
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
