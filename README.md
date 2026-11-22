@@ -78,7 +78,15 @@ From the repository root, continue with `uv run --locked python ...`.
 After updating the repository with `git pull --ff-only`, run `uv sync --locked`
 to apply any dependency changes.
 
-## Notebooks (weeks 2–3, 5–6)
+## Notebooks (weeks 2–3, 5–7)
+
+[Week 7: Diffusion image generation](exercises/week7/README.md) pairs a
+[session route](exercises/week7/worksheet.qmd) with
+`exercises/week7/diffusion.ipynb`. Implement the forward noising process, the
+denoising loss, the timestep input of a U-Net, and one DDPM sampling step; then
+diagnose and judge the generator. It uses the same notebook environment below;
+data are generated locally and no additional dependencies are needed. Check the
+starter and infrastructure with `uv run --locked python tools/check_week07.py`.
 
 [Week 6: U-Net and transfer learning](exercises/week6/README.md) pairs a
 [classroom worksheet](exercises/week6/worksheet.qmd) with

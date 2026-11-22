@@ -1,0 +1,31 @@
+---
+title: "Week 7: Diffusion image generation"
+description: "Build the forward process, the denoising loss, a time-aware U-Net, and the DDPM sampler; then diagnose and judge your generator."
+---
+
+Generate new images by learning to remove noise. Build the four parts of a small
+diffusion model, test each one, and find out whether flawed samples come from
+the sampler or from training.
+
+Complete the exercises in the [Week 7 notebook](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/diffusion.ipynb).
+Follow the [setup instructions](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/README.md) first.
+
+## Session route
+
+| Activity | Minutes |
+|---|---:|
+| 1. From predicting to generating | 5 |
+| 2. The forward process: paper calculation, direct noising, schedules | 15 |
+| 3. Learning to denoise: clean estimate and loss | 15 |
+| 4. A U-Net that knows the noise level | 10 |
+| 5. Train across all noise levels | 10 |
+| 6. The reverse process: one DDPM step, generate, diagnose | 20 |
+| 7. Judge the generator and individual exit ticket | 15 |
+| 8. Extended exercise: fill in a hidden region | optional, 15 |
+
+The core route takes **90 minutes**. Work in pairs and switch driver after
+activity 3. Write a prediction before you run a comparison; the exit ticket is
+individual. Pen-and-paper questions and response spaces are in the notebook.
+
+The notebook assumes the Week 6 U-Net and the PyTorch training loop. Its notation
+follows [Lesson 7: Diffusion Image Generation](https://healthml.github.io/deep-learning-book/chapters/07-diffusion/concepts.html).
