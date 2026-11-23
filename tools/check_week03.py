@@ -21,19 +21,24 @@ def main():
                 assert not cell['outputs'] and cell['execution_count'] is None
                 exec(compile(''.join(cell['source']), f'week03 cell {i}', 'exec'), scope)
                 plt.close('all')
-    # An unfinished warm-up must neither reveal a fallback nor block experiments.
-    assert scope['student_step'](np.array([2., -1.]), np.array([2., -10.]), .05) is None
+    # Both update rules, at a probe that the notebook's own checks do not use.
+    theta, grad, velocity = np.array([.5, -2.]), np.array([4., 1.]), np.array([-1., 3.])
+    np.testing.assert_allclose(scope['sgd_step'](theta, grad, .1), [.1, -2.1])
+    new_theta, new_velocity = scope['momentum_step'](theta, grad, velocity, .1, .5)
+    np.testing.assert_allclose(new_velocity, [3.5, 2.5])  # beta * velocity + grad
+    np.testing.assert_allclose(new_theta, [.15, -2.25])   # theta - lr * new velocity
     # Run A is an actual gradient-descent history with known quadratic dynamics.
     from build_week03_figure import recorded_run
     steps, train_a, valid_a = recorded_run()
     np.testing.assert_allclose(train_a, 5 * 1.5625**steps)
     np.testing.assert_allclose(valid_a, 8.5 * 1.5625**steps)
     # Closed-form coordinate evolution checks the GD loop at every step.
-    path, _ = scope['quadratic_run'](.15)
+    path, gd = scope['sgd_run'](.15)
     np.testing.assert_allclose(path, np.array([.85, -.5])[None, :] ** np.arange(41)[:, None], atol=1e-14)
-    gd = scope['quadratic_run'](.15)[1]
-    momentum = scope['quadratic_run'](.15, .4)[1]
-    unstable = scope['quadratic_run'](.4, .9)[1]
+    # With beta = 0 the momentum loop must reproduce plain gradient descent.
+    np.testing.assert_allclose(scope['momentum_run'](.15, 0.)[0], path, atol=1e-14)
+    momentum = scope['momentum_run'](.15, .4)[1]
+    unstable = scope['momentum_run'](.4, .9)[1]
     assert momentum[-1] < gd[-1] and unstable[-1] > unstable[0]
     # Independently differentiate the exact objective with autograd at a nonzero probe.
     X, y = scope['X_train'], scope['y_train']
@@ -76,7 +81,7 @@ def main():
     for actual, expected in zip(regenerated, [X, y, scope['X_valid'], scope['y_valid']]):
         torch.testing.assert_close(actual, expected)
     assert 'X_test' not in scope and 'y_test' not in scope
-    print('Week 3 passes: all code cells, GD recurrence, momentum cases, explicit gradient, batch budgets, checkpoint alignment, and reproducible data.')
+    print('Week 3 passes: all code cells, both update rules, GD recurrence, momentum cases, explicit gradient, batch budgets, checkpoint alignment, and reproducible data.')
 
 
 if __name__ == '__main__':
