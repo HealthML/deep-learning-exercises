@@ -84,9 +84,13 @@ to apply any dependency changes.
 [session route](exercises/week7/worksheet.qmd) with
 `exercises/week7/diffusion.ipynb`. Implement the forward noising process, the
 denoising loss, the timestep input of a U-Net, and one DDPM sampling step; then
-diagnose and judge the generator. It uses the same notebook environment below;
-data are generated locally and no additional dependencies are needed. Check the
-starter and infrastructure with `uv run --locked python tools/check_week07.py`.
+diagnose and judge the generator. The second session continues with
+`exercises/week7/diffusion_sampling.ipynb`: keep the trained network fixed and
+compare samplers that need 64, 16 or 4 network evaluations. Both use the same
+notebook environment below; data are generated locally and no additional
+dependencies are needed. Check the starters and infrastructure with
+`uv run --locked python tools/check_week07.py` and
+`uv run --locked python tools/check_week07_sampling.py`.
 
 [Week 6: U-Net and transfer learning](exercises/week6/README.md) pairs a
 [classroom worksheet](exercises/week6/worksheet.qmd) with

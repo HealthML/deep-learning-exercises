@@ -1,16 +1,19 @@
 ---
 title: "Week 7: Diffusion image generation"
-description: "Build the forward process, the denoising loss, a time-aware U-Net, and the DDPM sampler; then diagnose and judge your generator."
+description: "Build the forward process, the denoising loss, a time-aware U-Net, and the DDPM sampler; then diagnose and judge your generator, and find out how few sampling steps it needs."
 ---
 
 Generate new images by learning to remove noise. Build the four parts of a small
 diffusion model, test each one, and find out whether flawed samples come from
-the sampler or from training.
+the sampler or from training. Then keep the trained network fixed and find out
+how few sampling steps it needs.
 
-Complete the exercises in the [Week 7 notebook](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/diffusion.ipynb).
-Follow the [setup instructions](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/README.md) first.
+The week has two notebooks, one for each session. Follow the
+[setup instructions](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/README.md) first.
 
-## Session route
+## Session 1: build a diffusion model
+
+Complete the exercises in [diffusion.ipynb](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/diffusion.ipynb).
 
 | Activity | Minutes |
 |---|---:|
@@ -29,3 +32,27 @@ individual. Pen-and-paper questions and response spaces are in the notebook.
 
 The notebook assumes the Week 6 U-Net and the PyTorch training loop. Its notation
 follows [Lesson 7: Diffusion Image Generation](https://healthml.github.io/deep-learning-book/chapters/07-diffusion/concepts.html).
+
+## Session 2: how many denoising steps does an image need?
+
+Complete the exercises in [diffusion_sampling.ipynb](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/diffusion_sampling.ipynb).
+The trained network stays fixed; you change only the sampler.
+
+| Activity | Minutes |
+|---|---:|
+| Before you start: run the supplied parts, recall Session 1 while the network trains | 8 |
+| 1. Try: a shortcut that skips timesteps, and the oracle's logbook | 15 |
+| 2. Understand: the DDIM step, the jump plan, and the oracle test | 20 |
+| 3. Experiment: 64, 16 and 4 network evaluations; find the breaking point | 20 |
+| 4. Old noise or fresh noise? **or** 5. Extended exercise: ask for a disk on one side | 20 |
+| 6. Individual exit ticket | 7 |
+
+The route takes **90 minutes**. Activities 1 to 3 and the exit ticket are the
+core; for the remaining 20 minutes each pair chooses activity 4 or activity 5.
+Work in pairs and switch driver after activity 2. Write a prediction before you
+run a comparison.
+
+You do not need your notebook from Session 1: its parts are supplied,
+completed. The session follows
+[Lab 7: How Many Denoising Steps Do We Need?](https://healthml.github.io/deep-learning-book/chapters/07-diffusion/lab.html)
+in the course book.
