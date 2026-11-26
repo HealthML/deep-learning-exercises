@@ -1,9 +1,17 @@
 # Week 7: Diffusion image generation
 
-Open [diffusion.ipynb](diffusion.ipynb) for the pair lab. The notebook contains
-the theory, pen-and-paper questions, coding exercises, and answer spaces; the
-[worksheet](worksheet.qmd) gives the session route. Familiarity with the Week 6
-U-Net and the basic PyTorch training loop is assumed. The notation follows
+Two pair labs, one for each session of the week:
+
+1. [diffusion.ipynb](diffusion.ipynb): build, train, and judge a small
+   diffusion model.
+2. [diffusion_sampling.ipynb](diffusion_sampling.ipynb): keep the trained
+   network fixed and change the sampler. How many denoising steps does an image
+   need?
+
+Each notebook contains the theory, pen-and-paper questions, coding exercises,
+and answer spaces; the [worksheet](worksheet.qmd) gives both session routes.
+Familiarity with the Week 6 U-Net and the basic PyTorch training loop is
+assumed. The notation follows
 [Lesson 7: Diffusion Image Generation](https://healthml.github.io/deep-learning-book/chapters/07-diffusion/concepts.html)
 in the course book, and every equation is introduced before you use it.
 
@@ -14,15 +22,19 @@ uv sync --locked --group notebook
 uv run --locked --group notebook python -m jupyterlab exercises/week7/diffusion.ipynb
 ```
 
+For the second session, open `exercises/week7/diffusion_sampling.ipynb` in the
+same way.
+
 If your terminal has another checkout's environment activated, run `deactivate`
 first (or open a fresh terminal). Launching via `python -m jupyterlab` also avoids
 stale launcher paths if this checkout was moved or copied.
 
-Choose the repository's `.venv` kernel. The notebook uses the existing NumPy,
+Choose the repository's `.venv` kernel. The notebooks use the existing NumPy,
 Matplotlib, and CPU PyTorch dependencies. Data are generated locally; no extra
-packages, data downloads, or GPU are needed. All training takes about a minute.
+packages, data downloads, or GPU are needed. All training in a notebook takes
+about a minute.
 
-## Session plan
+## Session 1: build a diffusion model
 
 1. **From predicting to generating:** meet the disk images and see why sampling
    every pixel independently does not produce a disk.
@@ -54,18 +66,47 @@ neighbours.
 
 The overview figure displays offline. See [figure source notes](figures/README.md).
 
+## Session 2: how many denoising steps does an image need?
+
+`diffusion_sampling.ipynb` is a classroom version of
+[Lab 7: How Many Denoising Steps Do We Need?](https://healthml.github.io/deep-learning-book/chapters/07-diffusion/lab.html)
+in the course book. You do not need your notebook from Session 1: its parts
+are supplied, completed, at the top. Compare them with your own code.
+
+1. **Try a shortcut:** skip timesteps in the unchanged DDPM loop, watch it
+   fail, and locate the error with an oracle that keeps a logbook.
+2. **A step that can jump:** work out the DDIM step on paper, implement it,
+   plan the jumps, and verify the sampler with the oracle.
+3. **How few evaluations are enough?** Compare 64, 16 and 4 network evaluations
+   with one frozen network and the same starting noise; find the breaking
+   point and explain it.
+4. **Old noise or fresh noise?** Fill the noise of every state from two
+   sources, recover the DDPM sampler as one setting, and find out what decides
+   which image appears.
+5. **Extended exercise:** train a network with a label input and steer its
+   disks to the left or the right with classifier-free guidance.
+6. **Individual exit ticket.**
+
+Activities 1 to 3 and the exit ticket are the core route. For the remaining
+time choose activity 4 or activity 5. Complete the TODO assignments and rerun
+cells in order. All cells run in the unfinished starter, with reminders for
+sections that need your code. Switch driver after activity 2.
+
+One network trains for 1800 updates at the start, about half a minute, and is
+then frozen. Activity 5 trains a second network for about 20 seconds. As in
+Session 1, numbers differ a little from one laptop to the next.
+
 ## Check
 
 ```sh
 uv run --locked python tools/check_week07.py
+uv run --locked python tools/check_week07_sampling.py
 ```
 
-The checker executes the notebook's cells without opening Jupyter and tests the
-supplied data, schedule, reference denoisers, and network. On the unfinished
-starter it is a technical check, not a completed student submission. Once your
-TODOs are complete, run it again: it then also audits your forward process,
-loss, time input, sampler, and inpainting, and trains the network (about a
-minute). To check a personal copy, append its path to the command.
-
-Next step in the course book:
-[Lab 7: How Many Denoising Steps Do We Need?](https://healthml.github.io/deep-learning-book/chapters/07-diffusion/lab.html)
+Each checker executes the cells of one notebook without opening Jupyter and
+tests the supplied code: data, schedule, network, reference denoisers, and the
+supplied samplers. On an unfinished starter it is a technical check, not a
+completed student submission. Once your TODOs are complete, run it again: it
+then also audits your own functions against independent constructions and
+trains the networks (about a minute each). To check a personal copy, append its
+path to the command.
