@@ -11,6 +11,8 @@ how few sampling steps it needs.
 The week has two notebooks, one for each session. Follow the
 [setup instructions](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/README.md) first.
 
+If your first session ended after activity 4, complete [diffusion_part2.ipynb](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/diffusion_part2.ipynb) in the second session: it continues with activity 5 and ends with a shorter version of the Session 2 route.
+
 ## Session 1: build a diffusion model
 
 Complete the exercises in [diffusion.ipynb](https://github.com/HealthML/deep-learning-exercises/blob/main/exercises/week7/diffusion.ipynb).

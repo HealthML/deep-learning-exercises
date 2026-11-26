@@ -8,6 +8,13 @@ Two pair labs, one for each session of the week:
    network fixed and change the sampler. How many denoising steps does an image
    need?
 
+If your first session ended after activity 4 of `diffusion.ipynb`, use
+[diffusion_part2.ipynb](diffusion_part2.ipynb) in the second session instead of
+the second notebook. It supplies activities 1 to 4 completed, continues with
+activities 5 to 7 (train, generate, judge), and then runs a shorter version of
+the sampling lab. Its two extended exercises are those of
+`diffusion_sampling.ipynb`.
+
 Each notebook contains the theory, pen-and-paper questions, coding exercises,
 and answer spaces; the [worksheet](worksheet.qmd) gives both session routes.
 Familiarity with the Week 6 U-Net and the basic PyTorch training loop is
